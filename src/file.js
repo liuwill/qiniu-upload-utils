@@ -4,10 +4,17 @@ import path from 'path'
 export function buildFileList(basePath, fileList) {
   const rootPath = path.resolve(basePath)
 
-  return fileList.map(item => ({
-    path: item,
-    name: item.substring(rootPath.length + 1),
-  }))
+  return fileList.map(item => {
+    let filename = item.substring(rootPath.length + 1)
+    if (basePath === item) {
+      filename = path.basename(item)
+    }
+
+    return {
+      path: item,
+      name: filename,
+    }
+  })
 }
 
 export function listFiles(basePath) {

@@ -2,7 +2,7 @@
 
 import * as fileUtils from './file'
 import * as envUtils from './environment'
-import path from 'path'
+import * as uploader from './uploader'
 
 const argv = require('yargs')
   .usage('Usage: $0 --source=sourcePath --base=basePath')
@@ -12,15 +12,15 @@ const argv = require('yargs')
     alias: 's',
     default: '.'
   })
-  .option('base', {
+  .option('out', {
     describe: 'base path',
-    alias: 'b',
+    alias: 'o',
     default: 'temp'
   })
   .help('help')
   .argv
 
-if (!argv.source || !argv.base) {
+if (!argv.source || !argv.out) {
   console.log('Please Input FilePath.')
   process.exit(0)
 }
@@ -31,8 +31,9 @@ if (!bucketConfig) {
 }
 
 const basePath = argv.source
+const objectPath = argv.out
 
 const fileList = fileUtils.listFiles(basePath)
 const targetList = fileUtils.buildFileList(basePath, fileList)
 
-console.log(targetList)
+uploader.uploadFileBatch(objectPath, targetList)

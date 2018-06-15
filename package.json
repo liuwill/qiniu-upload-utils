@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rimraf dist && babel src src --copy-files --source-maps --out-dir dist",
+    "check": "eslint src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
