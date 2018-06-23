@@ -30,15 +30,21 @@ export function uploadFileBatch(basePath, fileList) {
   return
 }
 
+/**
+ * 上传单个文件
+ *
+ * @param {*} objectKey bucket文件的对象名
+ * @param {*} filePath 要上传的文件路径
+ */
 export function uploadSingleFile(objectKey, filePath) {
-  var keyToOverwrite = objectKey// 'image.jpg'
+  var keyToOverwrite = objectKey
   var options = {
     scope: bucket + ':' + keyToOverwrite
   }
   var putPolicy = new qiniu.rs.PutPolicy(options)
   var uploadToken = putPolicy.uploadToken(mac)
 
-  var localFile = filePath // '/Users/videopls/liuwill/imgs/efac6b11895368f999021298257e954e.jpg'
+  var localFile = filePath
   var formUploader = new qiniu.form_up.FormUploader(config)
   var putExtra = new qiniu.form_up.PutExtra()
   var key = keyToOverwrite

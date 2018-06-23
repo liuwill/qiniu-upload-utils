@@ -1,0 +1,7 @@
+--silly
+--full-trace
+--timeout 20000
+--compilers js:babel-core/register
+--recursive
+--require babel-polyfill
+test/unit
